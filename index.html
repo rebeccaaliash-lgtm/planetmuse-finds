@@ -78,10 +78,14 @@
     .rank { position: absolute; z-index: 2; top: 0; left: 0; padding: 9px 11px; background: var(--ink); color: #fff; font-size: 12px; font-weight: 700; }
     .image-wrap { position: relative; aspect-ratio: 1; overflow: hidden; background: #ebe7df; }
     .image-wrap img { display: block; width: 100%; height: 100%; object-fit: cover; }
-    .deal-badge { position: absolute; z-index: 2; top: 11px; left: 48px; padding: 6px 8px; background: var(--orange); color: #fff; font-size: 10px; font-weight: 700; }
+    
+    .deal-badge { position: absolute; z-index: 2; top: 11px; right: 11px; padding: 5px 9px; background: #fdf0e3; color: #22201e; font-size: 11px; font-weight: 700; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    
     .card-body { display: flex; flex-direction: column; flex: 1; padding: 17px 17px 0; }
     .rating { margin: 0 0 11px; color: var(--muted); font-size: 11px; }
     .rating .stars { color: #d79416; letter-spacing: 1px; }
+    .new-arrival { margin: 0 0 11px; font-size: 11px; font-weight: 700; color: #d97635; letter-spacing: 0.05em; text-transform: uppercase; }
+    
     .price-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 11px; }
     .price { font-size: 21px; font-weight: 700; letter-spacing: -.06em; }
     .regular-price { color: #928b83; font-size: 11px; }
@@ -93,6 +97,19 @@
     .feedback-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 16px; }
     .feedback-link { color: var(--muted); font-size: 10px; font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
     .amazon-button { width: calc(100% - 34px); margin: auto 17px 17px; padding: 14px 12px; }
+    
+    /* ===== 新增：活动过期的置灰样式 ===== */
+    .product-card.expired { opacity: 0.6; filter: grayscale(100%); }
+    .product-card.expired:hover { transform: none; box-shadow: var(--shadow); }
+    .expired-overlay {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5); color: white; display: flex;
+      justify-content: center; align-items: center;
+      font-size: 18px; font-weight: 700; letter-spacing: 0.1em; z-index: 3;
+    }
+    .expired .amazon-button { background: #777; pointer-events: none; }
+    .expired .copy-code { pointer-events: none; text-decoration: none; opacity: 0.5; }
+
     .empty-state { padding: 48px 16px; border: 1px dashed var(--line); text-align: center; color: var(--muted); font-size: 13px; }
     .empty-state button { margin-top: 5px; }
 
@@ -232,13 +249,12 @@
   </div>
 
   <script>
-    // 这里我帮你放满了 6 个产品，排版完美，价格和评分也做了优化
-           const products = [
+    const products = [
       {
-        id: 1, imageUrl: "https://m.media-amazon.com/images/I/81Vz2Br53JL._AC_SY550_.jpg", title: "Merry Christmas Graphic Shirt For Women Xmas Holiday Short Sleeve Tee", price: "$6.99", oldPrice: "$9.99", discount: "30% off", code: "ERWXAI95", amazonUrl: "https://www.amazon.com/dp/B0HGDHM2FR", time: "10-21 0:00--11-3 23:59", rating: "124", stars: 5, rank: 1
+        id: 1, imageUrl: "https://m.media-amazon.com/images/I/81Vz2Br53JL._AC_SY550_.jpg", title: "Merry Christmas Graphic Shirt For Women Xmas Holiday Short Sleeve Tee", price: "$6.99", oldPrice: "$9.99", discount: "30% off", code: "ERWXAI95", amazonUrl: "https://www.amazon.com/dp/B0HGDHM2FR", time: "10-21 0:00--11-3 23:59", rating: "", stars: 0, rank: 1
       },
       {
-        id: 2, imageUrl: "https://m.media-amazon.com/images/I/71V0y60k-KL._AC_SX569_.jpg", title: "Christmas Tree Shirts for Women Merry Christmas Shirt Holiday Graphic Tee", price: "$6.99-9.03", oldPrice: "$9.99-12.89", discount: "30% off", code: "5M1IAEG9", amazonUrl: "https://www.amazon.com/dp/B0HJ5YQX2F", time: "10-21 0:00--11-4 23:59", rating: "85", stars: 4, rank: 2
+        id: 2, imageUrl: "https://m.media-amazon.com/images/I/71V0y60k-KL._AC_SX569_.jpg", title: "Christmas Tree Shirts for Women Merry Christmas Shirt Holiday Graphic Tee", price: "$6.99-9.03", oldPrice: "$9.99-12.89", discount: "30% off", code: "5M1IAEG9", amazonUrl: "https://www.amazon.com/dp/B0HJ5YQX2F", time: "10-21 0:00--11-4 23:59", rating: "", stars: 0, rank: 2
       },
       {
         id: 3, imageUrl: "https://m.media-amazon.com/images/I/71DacQVa0ML._AC_SY550_.jpg", title: "Christmas Shirts for Men Christmas Tree Graphic Long Sleeve Holiday Top", price: "$8.99-11.24", oldPrice: "$11.99-14.89", discount: "25% off", code: "WSM2POF6", amazonUrl: "https://www.amazon.com/dp/B0HB3WHJFV", time: "10-21 0:00--10-31 23:59", rating: "6", stars: 4.2, rank: 3
@@ -262,7 +278,6 @@
 
     const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[character]));
 
-    // 最稳定不出错的星星算法
     function getStarString(rating) {
       if (rating >= 4.5) return "★★★★★";
       if (rating >= 4.0) return "★★★★☆";
@@ -270,23 +285,62 @@
       return "★★☆☆☆";
     }
 
+    // ===== 新增：计算是否过期的函数 =====
+    function isExpired(timeStr) {
+      try {
+        // 提取结束时间，例如从 "10-21 0:00--11-4 23:59" 提取 "11-4 23:59"
+        const parts = timeStr.split('--');
+        if (parts.length < 2) return false;
+        const endPart = parts[1].trim(); // 比如 11-4 23:59
+        
+        // 解析月份、日期、时间
+        const [datePart, timePart] = endPart.split(' ');
+        const [month, day] = datePart.split('-');
+        const [hour, minute] = timePart.split(':');
+        
+        // 生成日期对象 (注意：JavaScript 的月份是从 0 开始的，所以 month - 1)
+        // 默认使用当前年份
+        const currentYear = new Date().getFullYear();
+        const endDate = new Date(currentYear, parseInt(month) - 1, parseInt(day), parseInt(hour), parseInt(minute), 59);
+        
+        // 判断当前时间是否大于结束时间
+        return new Date() > endDate;
+      } catch (e) {
+        return false; // 如果解析出错，默认不过期
+      }
+    }
+
     function renderDateNav() {
       dateNav.innerHTML = `<span class="date-nav__label">BROWSE BY DATE</span>${dateCategories.map((category) => `<button class="date-chip ${state.date === category ? "is-active" : ""}" type="button" data-date="${escapeHtml(category)}">${escapeHtml(category)}</button>`).join("")}`;
     }
 
     function cardTemplate(product) {
-      return `<article class="product-card">
+      let ratingHtml = '';
+      if (product.rating && product.rating !== "0") {
+        ratingHtml = `<p class="rating"><span class="stars" aria-label="${product.stars} stars">${getStarString(product.stars)}</span> ${escapeHtml(product.rating)} ratings</p>`;
+      } else {
+        ratingHtml = `<p class="new-arrival">✨ New Arrival</p>`;
+      }
+
+      // ===== 新增：判断是否过期 =====
+      const expired = isExpired(product.time);
+
+      return `<article class="product-card ${expired ? 'expired' : ''}">
         <span class="rank">#${escapeHtml(product.rank)}</span>
-        <div class="image-wrap"><span class="deal-badge">🔥 Deal</span><img src="${product.imageUrl}" alt="${escapeHtml(product.title)}" /></div>
+        <div class="image-wrap">
+          <span class="deal-badge">💡 CC Deal</span>
+          ${expired ? '<div class="expired-overlay">EXPIRED</div>' : ''}
+          <img src="${product.imageUrl}" alt="${escapeHtml(product.title)}" />
+        </div>
         <div class="card-body">
-          <p class="rating"><span class="stars" aria-label="${product.stars} stars">${getStarString(product.stars)}</span> ${escapeHtml(product.rating)} ratings</p>
+          ${ratingHtml}
           <div class="price-row"><strong class="price">${escapeHtml(product.price)}</strong><s class="regular-price">Reg. ${escapeHtml(product.oldPrice)}</s></div>
           <h3 class="title">${escapeHtml(product.title)}</h3>
-          <div class="promo-box"><span>Code: ${escapeHtml(product.code)}</span><button class="copy-code" type="button" data-code="${escapeHtml(product.code)}">Copy Code</button></div>
+          <div class="promo-box"><span>Code: ${escapeHtml(product.code)}</span><button class="copy-code" type="button" data-code="${escapeHtml(product.code)}" ${expired ? 'disabled' : ''}>Copy Code</button></div>
           <p class="time-stock">Valid: ${escapeHtml(product.time)}</p>
           <div class="feedback-row"><a class="feedback-link" href="mailto:Rebeccaaliash@gmail.com?subject=Broken%20Link%20Feedback%20for%20${escapeHtml(product.title)}">Report broken link</a></div>
         </div>
-        <a class="amazon-button" href="${escapeHtml(product.amazonUrl)}" target="_blank" rel="noopener noreferrer">SHOP ON AMAZON <span aria-hidden="true">↗</span></a>
+        <a class="amazon-button" href="${expired ? '#' : escapeHtml(product.amazonUrl)}" target="_blank" rel="noopener noreferrer">${expired ? 'DEAL EXPIRED' : 'SHOP ON AMAZON <span aria-hidden="true">↗</span>'}</a>
       </article>`;
     }
 
@@ -305,6 +359,7 @@
     }
 
     async function copyCode(code, button) {
+      if (button.disabled) return;
       try { await navigator.clipboard.writeText(code); } catch {
         const helper = document.createElement("textarea"); helper.value = code; helper.style.position = "fixed"; helper.style.opacity = "0"; document.body.appendChild(helper); helper.select(); document.execCommand("copy"); helper.remove();
       }
@@ -322,7 +377,7 @@
 
     grid.addEventListener("click", (event) => {
       const copyButton = event.target.closest("[data-code]");
-      if (copyButton) copyCode(copyButton.dataset.code, copyButton);
+      if (copyButton && !copyButton.disabled) copyCode(copyButton.dataset.code, copyButton);
       if (event.target.closest("[data-clear]")) { state.query = ""; state.date = "All deals"; document.getElementById("searchInput").value = ""; renderDateNav(); renderProducts(); }
     });
 
@@ -330,7 +385,6 @@
     document.getElementById("year").textContent = new Date().getFullYear();
     renderDateNav(); renderProducts();
 
-    // === 联系弹窗逻辑 ===
     const contactModal = document.getElementById('contactModal');
     const openBtn = document.getElementById('openContactBtn');
     const closeBtn = document.getElementById('closeContactBtn');
@@ -361,7 +415,6 @@
       }
     });
 
-    // === 回到顶部逻辑 ===
     const backToTopBtn = document.getElementById("backToTopBtn");
     window.onscroll = function() {
       if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
