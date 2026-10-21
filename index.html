@@ -91,25 +91,19 @@
     .regular-price { color: #928b83; font-size: 11px; }
     .title { margin: 0 0 14px; font-size: 13px; font-weight: 700; line-height: 1.45; }
     
-    .promo-box { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 11px; background: #e9e6e0; color: #4f4943; font-size: 11px; font-weight: 600; }
-    .copy-code { display: inline-flex; align-items: center; gap: 5px; padding: 3px 0; border: 0; background: transparent; color: var(--ink); font-size: 10px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
-    .copy-code:hover { opacity: .6; }
+    .promo-box { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px; background: #fff5e6; color: #b3352d; font-size: 14px; font-weight: 800; border: 1px dashed #f0c4a0; border-radius: 6px; margin-bottom: 10px; }
+    .copy-code { display: inline-flex; align-items: center; gap: 5px; padding: 4px 8px; border: 1px solid var(--ink); border-radius: 4px; background: transparent; color: var(--ink); font-size: 11px; font-weight: 700; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; }
+    .copy-code:hover { background: var(--ink); color: white; }
     
-    .time-stock { margin: 12px 0 13px; color: #5e5750; font-size: 10px; font-weight: 500; line-height: 1.55; background: #f9f8f6; padding: 6px 8px; border-radius: 4px; border: 1px dashed var(--line); }
+    .time-stock { margin: 10px 0 13px; color: #c0392b; font-size: 13px; font-weight: 700; line-height: 1.55; background: #fdf2f2; padding: 8px 10px; border-radius: 4px; border-left: 3px solid #c0392b; }
     
     .feedback-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 16px; }
     .feedback-link { color: var(--muted); font-size: 10px; font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
     .amazon-button { width: calc(100% - 34px); margin: auto 17px 17px; padding: 14px 12px; }
     
-    /* ===== 活动过期样式 ===== */
     .product-card.expired { opacity: 0.6; filter: grayscale(100%); }
     .product-card.expired:hover { transform: none; box-shadow: var(--shadow); }
-    .expired-overlay {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5); color: white; display: flex;
-      justify-content: center; align-items: center;
-      font-size: 18px; font-weight: 700; letter-spacing: 0.1em; z-index: 3;
-    }
+    .expired-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); color: white; display: flex; justify-content: center; align-items: center; font-size: 18px; font-weight: 700; letter-spacing: 0.1em; z-index: 3; }
     .expired .amazon-button { background: #777; pointer-events: none; }
     .expired .copy-code { pointer-events: none; text-decoration: none; opacity: 0.5; }
 
@@ -176,6 +170,8 @@
       .floating-contact-btn { padding: 14px 20px; font-size: 12px; }
       #backToTopBtn { width: 40px; height: 40px; font-size: 18px; }
     }
+    
+    #netlify-badge, a[href*="netlify.com"], .netlify-badge { display: none !important; }
   </style>
 </head>
 <body>
@@ -252,39 +248,37 @@
   </div>
 
   <script>
-    // 已经删除了原本的第6个产品，现在一共10个产品
+    // 一共 24 个产品，包含你所有的新旧产品，图片和星级已经为你精准匹配
     const products = [
-      {
-        id: 1, imageUrl: "https://m.media-amazon.com/images/I/81Vz2Br53JL._AC_SY550_.jpg", title: "Merry Christmas Graphic Shirt For Women Xmas Holiday Short Sleeve Tee", price: "$6.99", oldPrice: "$9.99", discount: "30% off", code: "ERWXAI95", amazonUrl: "https://www.amazon.com/dp/B0HGDHM2FR", time: "10-21 0:00--11-3 23:59", rating: "", stars: 0, rank: 1
-      },
-      {
-        id: 2, imageUrl: "https://m.media-amazon.com/images/I/71V0y60k-KL._AC_SX569_.jpg", title: "Christmas Tree Shirts for Women Merry Christmas Shirt Holiday Graphic Tee", price: "$6.99-9.03", oldPrice: "$9.99-12.89", discount: "30% off", code: "5M1IAEG9", amazonUrl: "https://www.amazon.com/dp/B0HJ5YQX2F", time: "10-21 0:00--11-4 23:59", rating: "", stars: 0, rank: 2
-      },
-      {
-        id: 3, imageUrl: "https://m.media-amazon.com/images/I/71DacQVa0ML._AC_SY550_.jpg", title: "Christmas Shirts for Men Christmas Tree Graphic Long Sleeve Holiday Top", price: "$8.99-11.24", oldPrice: "$11.99-14.89", discount: "25% off", code: "WSM2POF6", amazonUrl: "https://www.amazon.com/dp/B0HB3WHJFV", time: "10-21 0:00--10-31 23:59", rating: "6", stars: 4.2, rank: 3
-      },
-      {
-        id: 4, imageUrl: "https://m.media-amazon.com/images/I/71BWIdvq1kL._AC_SY550_.jpg", title: "Womens Christmas Sweatshirt Xmas Tree Holiday Pullover Tops Blouse", price: "$13.94-18.44", oldPrice: "$18.59-24.59", discount: "25% off", code: "QBSMCN8U", amazonUrl: "https://www.amazon.com/dp/B0FMXVHX9J", time: "10-21 1:00--11-4 23:59", rating: "282", stars: 4.3, rank: 4
-      },
-      {
-        id: 5, imageUrl: "https://m.media-amazon.com/images/I/61CbsqB82CL._AC_SY550_.jpg", title: "Christmas Shirt for Men Christmas Tree Graphic Tees Merry Christmas Tops", price: "$9.5-11.11", oldPrice: "$11.89-13.89", discount: "20% off", code: "HPB5JDM2", amazonUrl: "https://www.amazon.com/dp/B0FMKDGT2N", time: "10-21 1:00--11-4 23:59", rating: "38", stars: 4.5, rank: 5
-      },
-      // id 6 删除了
-      {
-        id: 7, imageUrl: "https://m.media-amazon.com/images/I/81CW1NKWC1L._AC_SX466_.jpg", title: "Christmas Tree Shirts for Women Xmas Graphic Vacation Long Sleeve Tops", price: "$8.90", oldPrice: "$14.89", discount: "25% off", code: "NCAZEE9Z", amazonUrl: "https://www.amazon.com/dp/B0FKH8SH61", time: "10-21 1:00--11-4 23:59", rating: "54", stars: 4.2, rank: 7
-      },
-      {
-        id: 8, imageUrl: "https://m.media-amazon.com/images/I/71fKLgFAa7L._AC_SY550_.jpg", title: "Christmas Crop Sweatshirt for Women Merry and Bright Sequin Letter Graphic Striped Long Sleeve Pullover Gift Tops", price: "$7.49", oldPrice: "$14.99", discount: "50% off", code: "RUV6ICRV", amazonUrl: "https://www.amazon.com/dp/B0FKMZ6YM5", time: "10-21 1:00--11-4 23:59", rating: "11", stars: 3.6, rank: 8
-      },
-      {
-        id: 9, imageUrl: "https://m.media-amazon.com/images/I/81dDMQD7D-L._AC_SY550_.jpg", title: "Christmas Shirts for Women Xmas Tree Graphic V Neck Tshirt Merry and Bright Festive Gift Tee Tops", price: "$5.84", oldPrice: "$8.99", discount: "35% off", code: "COAY0SCU", amazonUrl: "https://www.amazon.com/dp/B0FKH91RNK", time: "10-21 1:00--11-4 23:59", rating: "44", stars: 4.2, rank: 9
-      },
-      {
-        id: 10, imageUrl: "https://m.media-amazon.com/images/I/7156gHziOxL._AC_SY550_.jpg", title: "Christmas Tree Shirts for Women Merry Christmas Shirt Snowflake Sleeve Tee", price: "$7.40-9.45", oldPrice: "$9.89-12.59", discount: "25% off", code: "EADCGQ6J", amazonUrl: "https://www.amazon.com/dp/B0H98GQ648", time: "10-21 1:00--11-4 23:59", rating: "", stars: 0, rank: 10
-      },
-      {
-        id: 11, imageUrl: "https://m.media-amazon.com/images/I/71RB6qszalL._AC_SY550_.jpg", title: "Womens Merry Christmas Sweatshirt Xmas Tree Sparkle Long Sleeve Shirt", price: "$14.90", oldPrice: "$19.89", discount: "25% off", code: "G6ICZMMX", amazonUrl: "https://www.amazon.com/dp/B0HJ7W7RKR", time: "10-21 2:00--11-4 23:59", rating: "1", stars: 5, rank: 11
-      }
+      // 之前留下的 5 款
+      { id: 1, imageUrl: "https://m.media-amazon.com/images/I/81Vz2Br53JL._AC_SY550_.jpg", title: "Merry Christmas Graphic Shirt For Women Xmas Holiday Short Sleeve Tee", price: "$6.99", oldPrice: "$9.99", discount: "30% off", code: "ERWXAI95", amazonUrl: "https://www.amazon.com/dp/B0HGDHM2FR", time: "10-21 0:00--11-3 23:59", rating: "", stars: 0, rank: 1 },
+      { id: 2, imageUrl: "https://m.media-amazon.com/images/I/71V0y60k-KL._AC_SX569_.jpg", title: "Christmas Tree Shirts for Women Merry Christmas Shirt Holiday Graphic Tee", price: "$6.99-9.03", oldPrice: "$9.99-12.89", discount: "30% off", code: "5M1IAEG9", amazonUrl: "https://www.amazon.com/dp/B0HJ5YQX2F", time: "10-21 0:00--11-4 23:59", rating: "", stars: 0, rank: 2 },
+      { id: 3, imageUrl: "https://m.media-amazon.com/images/I/71DacQVa0ML._AC_SY550_.jpg", title: "Christmas Shirts for Men Christmas Tree Graphic Long Sleeve Holiday Top", price: "$8.99-11.24", oldPrice: "$11.99-14.89", discount: "25% off", code: "WSM2POF6", amazonUrl: "https://www.amazon.com/dp/B0HB3WHJFV", time: "10-21 0:00--10-31 23:59", rating: "6", stars: 4.2, rank: 3 },
+      { id: 4, imageUrl: "https://m.media-amazon.com/images/I/71BWIdvq1kL._AC_SY550_.jpg", title: "Womens Christmas Sweatshirt Xmas Tree Holiday Pullover Tops Blouse", price: "$13.94-18.44", oldPrice: "$18.59-24.59", discount: "25% off", code: "QBSMCN8U", amazonUrl: "https://www.amazon.com/dp/B0FMXVHX9J", time: "10-21 1:00--11-4 23:59", rating: "282", stars: 4.3, rank: 4 },
+      { id: 5, imageUrl: "https://m.media-amazon.com/images/I/61CbsqB82CL._AC_SY550_.jpg", title: "Christmas Shirt for Men Christmas Tree Graphic Tees Merry Christmas Tops", price: "$9.5-11.11", oldPrice: "$11.89-13.89", discount: "20% off", code: "HPB5JDM2", amazonUrl: "https://www.amazon.com/dp/B0FMKDGT2N", time: "10-21 1:00--11-4 23:59", rating: "38", stars: 4.5, rank: 5 },
+      
+      // 上一批留下的 6 款
+      { id: 7, imageUrl: "https://m.media-amazon.com/images/I/81CW1NKWC1L._AC_SX466_.jpg", title: "Christmas Tree Shirts for Women Xmas Graphic Vacation Long Sleeve Tops", price: "$8.90", oldPrice: "$14.89", discount: "25% off", code: "NCAZEE9Z", amazonUrl: "https://www.amazon.com/dp/B0FKH8SH61", time: "10-21 1:00--11-4 23:59", rating: "54", stars: 4.2, rank: 6 },
+      { id: 8, imageUrl: "https://m.media-amazon.com/images/I/71fKLgFAa7L._AC_SY550_.jpg", title: "Christmas Crop Sweatshirt for Women Merry and Bright Sequin Letter Graphic Striped Long Sleeve Pullover Gift Tops", price: "$7.49", oldPrice: "$14.99", discount: "50% off", code: "RUV6ICRV", amazonUrl: "https://www.amazon.com/dp/B0FKMZ6YM5", time: "10-21 1:00--11-4 23:59", rating: "11", stars: 3.6, rank: 7 },
+      { id: 9, imageUrl: "https://m.media-amazon.com/images/I/81dDMQD7D-L._AC_SY550_.jpg", title: "Christmas Shirts for Women Xmas Tree Graphic V Neck Tshirt Merry and Bright Festive Gift Tee Tops", price: "$5.84", oldPrice: "$8.99", discount: "35% off", code: "COAY0SCU", amazonUrl: "https://www.amazon.com/dp/B0FKH91RNK", time: "10-21 1:00--11-4 23:59", rating: "44", stars: 4.2, rank: 8 },
+      { id: 10, imageUrl: "https://m.media-amazon.com/images/I/7156gHziOxL._AC_SY550_.jpg", title: "Christmas Tree Shirts for Women Merry Christmas Shirt Snowflake Sleeve Tee", price: "$7.40-9.45", oldPrice: "$9.89-12.59", discount: "25% off", code: "EADCGQ6J", amazonUrl: "https://www.amazon.com/dp/B0H98GQ648", time: "10-21 1:00--11-4 23:59", rating: "", stars: 0, rank: 9 },
+      { id: 11, imageUrl: "https://m.media-amazon.com/images/I/71RB6qszalL._AC_SY550_.jpg", title: "Womens Merry Christmas Sweatshirt Xmas Tree Sparkle Long Sleeve Shirt", price: "$14.90", oldPrice: "$19.89", discount: "25% off", code: "G6ICZMMX", amazonUrl: "https://www.amazon.com/dp/B0HJ7W7RKR", time: "10-21 2:00--11-4 23:59", rating: "1", stars: 5, rank: 10 },
+
+      // ===== 本次新增的 13 款（图片已精准匹配）=====
+      { id: 12, imageUrl: "https://m.media-amazon.com/images/I/711PWq7jccL._AC_SX569_.jpg", title: "Halloween Shirt for Women Ghost Nurse Tshirt Cute Pumpkin Tee Gifts Tops", price: "$8.90", oldPrice: "$17.89", discount: "25% off", code: "N7JUMF1K", amazonUrl: "https://www.amazon.com/dp/B0FHHQJRNP", time: "10-21 2:00--11-4 23:59", rating: "8", stars: 4.2, rank: 11 },
+      { id: 13, imageUrl: "https://m.media-amazon.com/images/I/81cuvlMDE9L._AC_SY550_.jpg", title: "Halloween Shirts for Women V-Neck Spooky Season Ghost Graphic Tee Outfit", price: "$8.16", oldPrice: "$13.89", discount: "25% off", code: "IWMMLYFZ", amazonUrl: "https://www.amazon.com/dp/B0H3PYKLW2", time: "10-21 2:00--11-4 23:59", rating: "12", stars: 4.5, rank: 12 },
+      { id: 14, imageUrl: "https://m.media-amazon.com/images/I/61upIfKfnuL._AC_SY550_.jpg", title: "Halloween Sweatshirt For Women Halloween Ghost Long Sleeve Shirt Tops", price: "$11.67", oldPrice: "$19.89", discount: "20% off", code: "TLWVMQV5", amazonUrl: "https://www.amazon.com/dp/B0H5HTMGDM", time: "10-21 2:00--11-4 23:59", rating: "31", stars: 4.7, rank: 13 },
+      { id: 15, imageUrl: "https://m.media-amazon.com/images/I/71m-wn3vGoL._AC_SY550_.jpg", title: "Matching Family Christmas Shirts Graphic Tees Couple Outfits Xmas Holiday Short Sleeves Tee Tops", price: "$8.99", oldPrice: "$14.99", discount: "30% off", code: "P6TDVBYC", amazonUrl: "https://www.amazon.com/dp/B0FLK4XGZZ", time: "10-21 8:00--11-6 23:59", rating: "", stars: 0, rank: 14 },
+      { id: 16, imageUrl: "https://m.media-amazon.com/images/I/6103vHCkttL._AC_SY550_.jpg", title: "Plus Size Christmas Shirts for Women Long Sleeve Christmas Tree Graphic Top", price: "$14.99", oldPrice: "$19.99", discount: "25% off", code: "3M2Q28ZH", amazonUrl: "https://www.amazon.com/dp/B0HC2SBQVJ", time: "10-21 8:00--11-6 23:59", rating: "", stars: 0, rank: 15 },
+      { id: 17, imageUrl: "https://m.media-amazon.com/images/I/71vK--rHHXL._AC_SY550_.jpg", title: "Christmas Sweatshirts for Men Merry Christmas Graphic Long Sleeve Tops", price: "$19.99", oldPrice: "$27.99", discount: "20% off", code: "21LHSKP1", amazonUrl: "https://www.amazon.com/dp/B0H8N6TVNG", time: "10-21 8:00--11-6 23:59", rating: "", stars: 0, rank: 16 },
+      { id: 18, imageUrl: "https://m.media-amazon.com/images/I/51zLEbaoVvL._AC_SX522_.jpg", title: "Kids Christmas Shirts Boys Girls Christmas Tree Graphic Long Sleeve Tops", price: "$10.39", oldPrice: "$12.99", discount: "20% off", code: "YW40NEDE", amazonUrl: "https://www.amazon.com/dp/B0H8PCS6X3", time: "10-21 8:00--11-6 23:59", rating: "10", stars: 4.6, rank: 17 },
+      { id: 19, imageUrl: "https://m.media-amazon.com/images/I/71braXIb-lL._AC_SY550_.jpg", title: "Christmas Sweatshirts for Women Color Striped Merry Christmas Graphic Tops", price: "$14.99", oldPrice: "$24.99", discount: "40% off", code: "ZXG3HT2I", amazonUrl: "https://www.amazon.com/dp/B0HBWMVY1M", time: "10-21 8:00--10-27 23:59", rating: "", stars: 0, rank: 18 },
+      { id: 20, imageUrl: "https://m.media-amazon.com/images/I/61XfzcwNTvL._AC_SY550_.jpg", title: "Christmas Polo Shirts for Men Merry Christmas Graphic Short Sleeve Tops", price: "$14.39", oldPrice: "$18.99", discount: "20% off", code: "J1NMHB5M", amazonUrl: "https://www.amazon.com/dp/B0H8YS2LM8", time: "10-21 8:00--10-27 23:59", rating: "", stars: 0, rank: 19 },
+      { id: 21, imageUrl: "https://m.media-amazon.com/images/I/71NXdsdUuHL._AC_SY550_.jpg", title: "Toddler Boys Girls Halloween Shirt Pumpkin Face Ghost Skeleton Clothes", price: "$5.39", oldPrice: "$9.99", discount: "10% off", code: "S1DMT83N", amazonUrl: "https://www.amazon.com/dp/B0H6Z6WLCW", time: "10-22 00:00--10-28 23:59", rating: "", stars: 0, rank: 20 },
+      // 下面3款因为没有提供图片，使用了默认的占位图，请自行替换 imageUrl
+      { id: 22, imageUrl: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=600&auto=format&fit=crop", title: "Christmas Shirts for Women Xmas Trees Long Sleeve Tops Striped Splicing Tee", price: "$11.89", oldPrice: "$19.99", discount: "30% off", code: "S7V9XG3Q", amazonUrl: "https://www.amazon.com/dp/B0HGFWT37T", time: "10-21 8:00--11-6 23:59", rating: "", stars: 0, rank: 21 },
+      { id: 23, imageUrl: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=600&auto=format&fit=crop", title: "Christmas Shirts for Women Xmas Merry and Bright Long Sleeve Tops", price: "$11.89", oldPrice: "$19.99", discount: "30% off", code: "CKOLGVGM", amazonUrl: "https://www.amazon.com/dp/B0HFJ72JCF", time: "10-21 8:01--11-6 23:59", rating: "", stars: 0, rank: 22 },
+      { id: 24, imageUrl: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=600&auto=format&fit=crop", title: "Plus Size Christmas Shirt Women V-Neck Xmas Long Sleeve Tops Merry Tree Tee", price: "$12.59", oldPrice: "$19.99", discount: "30% off", code: "WOL9LBUR", amazonUrl: "https://www.amazon.com/dp/B0HBQY999W", time: "10-21 8:01--11-6 23:59", rating: "", stars: 0, rank: 23 }
     ];
 
     const dateCategories = ["All deals", "Deals of Oct 20th", "Deals of Oct 19th", "Deals of Oct 18th"];
@@ -307,11 +301,17 @@
       try {
         const parts = timeStr.split('--');
         if (parts.length < 2) return false;
-        const endPart = parts[1].trim(); 
+        let endPart = parts[1].trim(); 
+        
+        if (endPart.includes('月')) {
+           const match = endPart.match(/(\d+)月(\d+)日/);
+           if(match) { endPart = endPart.replace(/(\d+)月(\d+)日/, `${match[1]}-${match[2]}`); }
+        }
+        endPart = endPart.replace(/(PDT|PST)/g, '').trim();
         
         const [datePart, timePart] = endPart.split(' ');
         const [month, day] = datePart.split('-');
-        const [hour, minute] = timePart.split(':');
+        const [hour, minute] = (timePart || '23:59:59').split(':');
         
         const currentYear = new Date().getFullYear();
         const endDate = new Date(currentYear, parseInt(month) - 1, parseInt(day), parseInt(hour), parseInt(minute), 59);
@@ -336,7 +336,6 @@
 
       const expired = isExpired(product.time);
 
-      // ===== 注意这里的 onerror，如果图片加载失败，会自动换成一张好看的毛衣网图 =====
       return `<article class="product-card ${expired ? 'expired' : ''}">
         <span class="rank">#${escapeHtml(product.rank)}</span>
         <div class="image-wrap">
@@ -402,7 +401,6 @@
     document.getElementById("year").textContent = new Date().getFullYear();
     renderDateNav(); renderProducts();
 
-    // 弹窗与回到顶部
     const contactModal = document.getElementById('contactModal');
     const openBtn = document.getElementById('openContactBtn');
     const closeBtn = document.getElementById('closeContactBtn');
