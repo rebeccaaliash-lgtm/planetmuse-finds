@@ -248,7 +248,7 @@
   </div>
 
   <script>
-    // 只包含"提交需求"为 True 的产品，一共 30 款
+    // 30 个打勾产品，图片/星级/时间全部精准匹配
     const products = [
       // 1-5
       { id: 1, imageUrl: "https://m.media-amazon.com/images/I/81Vz2Br53JL._AC_SY550_.jpg", title: "Merry Christmas Graphic Shirt For Women Xmas Holiday Short Sleeve Tee", price: "$6.99", oldPrice: "$9.99", discount: "30% off", code: "ERWXAI95", amazonUrl: "https://www.amazon.com/dp/B0HGDHM2FR", time: "10-21 0:00--11-3 23:59", rating: "", stars: 0, rank: 1 },
@@ -283,11 +283,11 @@
       { id: 29, imageUrl: "https://m.media-amazon.com/images/I/71braXIb-lL._AC_SY550_.jpg", title: "Christmas Sweatshirts for Women Color Striped Merry Christmas Graphic Tops", price: "$14.99", oldPrice: "$24.99", discount: "40% off", code: "ZXG3HT2I", amazonUrl: "https://www.amazon.com/dp/B0HBWMVY1M", time: "10-21 8:00--10-27 23:59", rating: "", stars: 0, rank: 27 },
       { id: 30, imageUrl: "https://m.media-amazon.com/images/I/61XfzcwNTvL._AC_SY550_.jpg", title: "Christmas Polo Shirts for Men Merry Christmas Graphic Short Sleeve Tops", price: "$14.39", oldPrice: "$18.99", discount: "20% off", code: "J1NMHB5M", amazonUrl: "https://www.amazon.com/dp/B0H8YS2LM8", time: "10-21 8:00--10-27 23:59", rating: "", stars: 0, rank: 28 },
       
-      // 剩下的两款童装/特价款
+      // 最新的三款（替换了真实图片和评分）
       { id: 31, imageUrl: "https://m.media-amazon.com/images/I/71NXdsdUuHL._AC_SY550_.jpg", title: "Toddler Boys Girls Halloween Shirt Pumpkin Face Ghost Skeleton Clothes", price: "$5.39-8.99", oldPrice: "$5.99-9.99", discount: "10% off", code: "S1DMT83N", amazonUrl: "https://www.amazon.com/dp/B0H6Z6WLCW", time: "10月22日 00:00:00 PDT--10月28日 23:59:59 PDT", rating: "", stars: 0, rank: 29 },
-      { id: 32, imageUrl: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=600&auto=format&fit=crop", title: "Christmas Shirts for Women Xmas Trees Long Sleeve Tops Striped Splicing Tee", price: "$11.89-13.99", oldPrice: "$16.99-19.99", discount: "30% off", code: "S7V9XG3Q", amazonUrl: "https://www.amazon.com/dp/B0HGFWT37T", time: "10-21 8:00--11-6 23:59", rating: "", stars: 0, rank: 30 },
-      { id: 33, imageUrl: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=600&auto=format&fit=crop", title: "Christmas Shirts for Women Xmas Merry and Bright Long Sleeve Tops", price: "$11.89-13.99", oldPrice: "$16.99-19.99", discount: "30% off", code: "CKOLGVGM", amazonUrl: "https://www.amazon.com/dp/B0HFJ72JCF", time: "10-21 8:01--11-6 23:59", rating: "", stars: 0, rank: 31 },
-      { id: 34, imageUrl: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=600&auto=format&fit=crop", title: "Plus Size Christmas Shirt Women V-Neck Xmas Long Sleeve Tops Merry Tree Tee", price: "$12.59-13.99", oldPrice: "$17.99-19.99", discount: "30% off", code: "WOL9LBUR", amazonUrl: "https://www.amazon.com/dp/B0HBQY999W", time: "10-21 8:01--11-6 23:59", rating: "", stars: 0, rank: 32 }
+      { id: 32, imageUrl: "https://m.media-amazon.com/images/I/71tVdy-lOML._AC_SY550_.jpg", title: "Christmas Shirts for Women Xmas Trees Long Sleeve Tops Striped Splicing Tee", price: "$11.89-13.99", oldPrice: "$16.99-19.99", discount: "30% off", code: "S7V9XG3Q", amazonUrl: "https://www.amazon.com/dp/B0HGFWT37T", time: "10-21 8:00--11-6 23:59", rating: "", stars: 0, rank: 30 },
+      { id: 33, imageUrl: "https://m.media-amazon.com/images/I/81kK571O1hL._AC_SY550_.jpg", title: "Christmas Shirts for Women Xmas Merry and Bright Long Sleeve Tops", price: "$11.89-13.99", oldPrice: "$16.99-19.99", discount: "30% off", code: "CKOLGVGM", amazonUrl: "https://www.amazon.com/dp/B0HFJ72JCF", time: "10-21 8:01--11-6 23:59", rating: "2", stars: 5, rank: 31 },
+      { id: 34, imageUrl: "https://m.media-amazon.com/images/I/815szCNrt-L._AC_SY550_.jpg", title: "Plus Size Christmas Shirt Women V-Neck Xmas Long Sleeve Tops Merry Tree Tee", price: "$12.59-13.99", oldPrice: "$17.99-19.99", discount: "30% off", code: "WOL9LBUR", amazonUrl: "https://www.amazon.com/dp/B0HBQY999W", time: "10-21 8:01--11-6 23:59", rating: "1", stars: 5, rank: 32 }
     ];
 
     const dateCategories = ["All deals", "Deals of Oct 20th", "Deals of Oct 19th", "Deals of Oct 18th"];
