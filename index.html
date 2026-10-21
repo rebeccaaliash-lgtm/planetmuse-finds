@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f5f2eb" />
+  <meta name="description" content="Planet Muse — curated women's fashion deals." />
+  <title>Planet Muse — Fashion Deals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f5f2eb; --paper: #ffffff; --ink: #22201e; --muted: #77716a;
+      --line: rgba(34, 32, 30, 0.14); --soft: #eeebe5; --orange: #d97635;
+      --red: #b3352d; --shadow: 0 10px 28px rgba(34, 32, 30, 0.075);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; min-width: 320px; background: var(--bg); color: var(--ink); font-family: Inter, Arial, sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+    /* Header & Nav */
+    .site-header { width: min(100% - 40px, 1400px); min-height: 82px; margin: 0 auto; display: grid; grid-template-columns: 1fr minmax(220px, 380px) 1fr; align-items: center; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 9px; width: fit-content; font-size: 17px; font-weight: 700; letter-spacing: -0.055em; }
+    .brand-mark { width: 20px; height: 13px; position: relative; display: inline-block; border: 1.4px solid var(--ink); border-radius: 50%; transform: rotate(-25deg); }
+    .brand-mark::after { content: ""; position: absolute; top: -4px; right: 0; width: 4px; height: 4px; border-radius: 50%; background: var(--ink); }
+    .search-form { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border: 1px solid var(--line); background: rgba(255,255,255,.42); }
+    .search-form svg { width: 16px; flex: 0 0 auto; color: var(--muted); }
+    .search-form input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 12px; }
+    .search-form input::placeholder { color: #938c83; }
+    .home-link { justify-self: end; display: inline-flex; align-items: center; gap: 7px; padding: 10px 13px; border: 1px solid var(--ink); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
+    .home-link:hover { background: var(--ink); color: white; }
+
+    .date-nav { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(255,255,255,.48); }
+    .date-nav__inner { width: min(100% - 40px, 1400px); margin: 0 auto; display: flex; align-items: center; gap: 8px; padding: 9px 0; overflow-x: auto; scrollbar-width: thin; }
+    .date-nav__label { flex: 0 0 auto; margin-right: 4px; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .date-chip { flex: 0 0 auto; padding: 8px 11px; border: 1px solid transparent; background: transparent; color: var(--muted); font-size: 11px; white-space: nowrap; }
+    .date-chip:hover, .date-chip.is-active { border-color: var(--ink); background: var(--ink); color: white; }
+
+    /* Hero */
+    .hero { width: min(100% - 40px, 1400px); min-height: 360px; margin: 28px auto 0; display: grid; grid-template-columns: .88fr 1.12fr; overflow: hidden; background: #e8dfd2; }
+    .hero-copy { display: flex; flex-direction: column; justify-content: center; padding: 54px clamp(28px, 6vw, 90px); }
+    .eyebrow { margin: 0 0 14px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    h1, h2 { margin: 0; font-family: "Playfair Display", Georgia, serif; font-weight: 400; letter-spacing: -.065em; }
+    h1 { max-width: 610px; font-size: clamp(48px, 6.5vw, 94px); line-height: .89; }
+    h1 em { font-style: italic; }
+    .hero-subtitle { max-width: 360px; margin: 23px 0 27px; color: #5e5750; font-size: 13px; line-height: 1.7; }
+    .hero-cta, .amazon-button { display: inline-flex; align-items: center; justify-content: center; gap: 20px; width: fit-content; border: 0; background: var(--ink); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; transition: transform .18s ease, background .18s ease; }
+    .hero-cta { padding: 15px 17px; }
+    .hero-cta:hover, .amazon-button:hover { background: #423d39; transform: translateY(-2px); }
+    .hero-art { min-height: 360px; position: relative; overflow: hidden; background: #d8c9b8; }
+    .hero-art::before { content: ""; position: absolute; inset: 0; opacity: .27; background-image: radial-gradient(rgba(34,32,30,.22) .5px, transparent .8px); background-size: 4px 4px; }
+    .hero-sun { position: absolute; top: 9%; right: 12%; width: 42%; aspect-ratio: 1; border-radius: 50%; background: #f5efe6; }
+    .hero-arc { position: absolute; width: 76%; aspect-ratio: .62; border: clamp(26px, 5vw, 68px) solid; border-radius: 100% 100% 0 0; transform: rotate(-13deg); }
+    .hero-arc--one { right: -14%; bottom: -18%; border-color: #705643; }
+    .hero-arc--two { right: 7%; bottom: -13%; border-color: #f7f3ec; }
+    .hero-arc--three { right: 25%; bottom: -22%; border-color: #b69679; }
+    .hero-note { position: absolute; z-index: 2; color: var(--ink); font-size: 8px; font-weight: 700; letter-spacing: .13em; writing-mode: vertical-rl; }
+    .hero-note--top { top: 22px; right: 20px; }
+    .hero-note--bottom { bottom: 22px; left: 20px; transform: rotate(180deg); }
+
+    /* Main Grid */
+    main { width: min(100% - 40px, 1400px); margin: 0 auto; }
+    .collection { padding: 102px 0 112px; }
+    .collection-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; padding-bottom: 30px; border-bottom: 1px solid var(--line); }
+    h2 { font-size: clamp(38px, 5vw, 74px); line-height: .9; }
+    .collection-intro { max-width: 270px; margin: 0 0 3px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .deal-summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 50px; color: var(--muted); font-size: 11px; }
+    .deal-summary strong { color: var(--ink); }
+    .clear-button, .empty-state button { border: 0; background: transparent; color: var(--ink); font-size: 11px; text-decoration: underline; text-underline-offset: 3px; }
+    .product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .product-card { position: relative; min-width: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--paper); border: 1px solid rgba(34,32,30,.1); box-shadow: var(--shadow); transition: transform .2s ease, box-shadow .2s ease; }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 18px 38px rgba(34,32,30,.11); }
+    .rank { position: absolute; z-index: 2; top: 0; left: 0; padding: 9px 11px; background: var(--ink); color: #fff; font-size: 12px; font-weight: 700; }
+    .image-wrap { position: relative; aspect-ratio: 1; overflow: hidden; background: #ebe7df; }
+    .image-wrap img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .deal-badge { position: absolute; z-index: 2; top: 11px; left: 48px; padding: 6px 8px; background: var(--orange); color: #fff; font-size: 10px; font-weight: 700; }
+    .card-body { display: flex; flex-direction: column; flex: 1; padding: 17px 17px 0; }
+    .rating { margin: 0 0 11px; color: var(--muted); font-size: 11px; }
+    .rating .stars { color: #d79416; letter-spacing: 1px; }
+    .price-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 11px; }
+    .price { font-size: 21px; font-weight: 700; letter-spacing: -.06em; }
+    .regular-price { color: #928b83; font-size: 11px; }
+    .title { margin: 0 0 14px; font-size: 13px; font-weight: 700; line-height: 1.45; }
+    .promo-box { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 11px; background: #e9e6e0; color: #4f4943; font-size: 11px; font-weight: 600; }
+    .copy-code { display: inline-flex; align-items: center; gap: 5px; padding: 3px 0; border: 0; background: transparent; color: var(--ink); font-size: 10px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+    .copy-code:hover { opacity: .6; }
+    .time-stock { margin: 11px 0 13px; color: #8b847b; font-size: 9px; line-height: 1.55; }
+    .feedback-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 16px; }
+    .feedback-link { color: var(--muted); font-size: 10px; font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+    .amazon-button { width: calc(100% - 34px); margin: auto 17px 17px; padding: 14px 12px; }
+    .empty-state { padding: 48px 16px; border: 1px dashed var(--line); text-align: center; color: var(--muted); font-size: 13px; }
+    .empty-state button { margin-top: 5px; }
+
+    /* Footer */
+    footer { width: min(100% - 40px, 1400px); margin: 0 auto; padding: 28px 0 35px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 25px; align-items: end; }
+    .footer-brand p, .footer-meta p { margin: 8px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .footer-meta { text-align: right; }
+    .footer-meta .feedback-link { display: inline-block; margin-bottom: 5px; color: var(--ink); }
+
+    /* 悬浮按钮区 */
+    .floating-actions {
+      position: fixed; bottom: 30px; right: 30px; z-index: 999;
+      display: flex; flex-direction: column; gap: 12px; align-items: center;
+    }
+
+    .floating-contact-btn {
+      background-color: var(--ink); color: white; border: none; padding: 16px 24px;
+      border-radius: 50px; font-weight: 700; font-size: 13px; cursor: pointer;
+      box-shadow: 0 8px 24px rgba(34,32,30,0.2); transition: all 0.3s ease;
+      display: flex; align-items: center; gap: 10px; font-family: Inter, sans-serif;
+    }
+    .floating-contact-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(34,32,30,0.3); background: #000; }
+
+    /* 回到顶部按钮 */
+    #backToTopBtn {
+      display: none; background-color: var(--ink); color: white; border: none;
+      width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+      box-shadow: 0 8px 24px rgba(34,32,30,0.2); transition: all 0.3s ease;
+      justify-content: center; align-items: center; font-size: 20px;
+    }
+    #backToTopBtn:hover { transform: translateY(-3px); background: #000; box-shadow: 0 12px 28px rgba(34,32,30,0.3); }
+
+    /* 联系弹窗 */
+    .modal-overlay {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4); z-index: 1000; justify-content: center; align-items: center;
+      backdrop-filter: blur(3px);
+    }
+    .modal-overlay.active { display: flex; animation: fadeIn 0.2s ease; }
+    
+    .chat-modal {
+      background: var(--paper); padding: 35px; width: min(90%, 420px);
+      border-radius: 12px; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      animation: slideUp 0.3s ease;
+    }
+    .chat-modal h3 { margin: 0 0 8px; font-family: "Playfair Display", Georgia, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.02em; }
+    .chat-modal p { font-size: 13px; color: var(--muted); margin: 0 0 25px; line-height: 1.6; }
+    
+    .chat-modal input, .chat-modal textarea {
+      width: 100%; padding: 14px; margin-bottom: 16px; border: 1px solid var(--line);
+      font-family: inherit; font-size: 13px; border-radius: 6px; background: #faf9f7;
+      transition: border-color 0.2s ease;
+    }
+    .chat-modal input:focus, .chat-modal textarea:focus { outline: none; border-color: var(--ink); background: white; }
+    .chat-modal textarea { height: 100px; resize: none; }
+    
+    .chat-modal .submit-btn {
+      width: 100%; padding: 16px; background: var(--ink); color: white;
+      border: none; border-radius: 6px; font-weight: 700; font-size: 12px;
+      letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s ease;
+    }
+    .chat-modal .submit-btn:hover { background: #423d39; }
+    
+    .close-modal {
+      position: absolute; top: 20px; right: 20px; font-size: 24px;
+      cursor: pointer; color: var(--muted); line-height: 1; transition: color 0.2s ease;
+    }
+    .close-modal:hover { color: var(--ink); }
+    
+    .direct-email-box {
+      margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--line);
+      font-size: 12px; text-align: center; color: var(--muted);
+    }
+    .direct-email-box a { color: var(--ink); font-weight: 600; cursor: pointer; border-bottom: 1px solid var(--ink); padding-bottom: 2px;}
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 900px) {
+      .site-header { grid-template-columns: 1fr minmax(180px, 280px) auto; }
+      .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero { grid-template-columns: 1fr .9fr; }
+    }
+    @media (max-width: 640px) {
+      .site-header, .date-nav__inner, .hero, main, footer { width: min(100% - 24px, 1400px); }
+      .site-header { min-height: 70px; grid-template-columns: 1fr auto; gap: 12px; }
+      .search-form { grid-column: 1 / -1; grid-row: 2; display: none; width: 100%; }
+      .site-header.is-search-open { padding: 10px 0; grid-template-columns: 1fr auto; }
+      .site-header.is-search-open .search-form { display: flex; }
+      .home-link { padding: 9px 10px; font-size: 10px; }
+      .date-nav__inner { gap: 5px; }
+      .date-nav__label { font-size: 9px; }
+      .date-chip { padding: 7px 8px; font-size: 10px; }
+      .hero { grid-template-columns: 1fr; margin-top: 17px; }
+      .hero-copy { min-height: 350px; padding: 42px 26px; }
+      .hero-art { min-height: 260px; }
+      .collection { padding: 70px 0 80px; }
+      .collection-heading { display: block; }
+      .collection-intro { margin-top: 18px; }
+      .product-grid { grid-template-columns: 1fr; gap: 17px; }
+      footer { display: block; }
+      .footer-meta { margin-top: 20px; text-align: left; }
+      .floating-actions { bottom: 20px; right: 20px; }
+      .floating-contact-btn { padding: 14px 20px; font-size: 12px; }
+      #backToTopBtn { width: 40px; height: 40px; font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <a class="brand" href="#top" aria-label="Planet Muse home"><span class="brand-mark" aria-hidden="true"></span>Planet Muse</a>
+    <form class="search-form" id="searchForm" role="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+      <label class="sr-only" for="searchInput">Search deals</label>
+      <input id="searchInput" type="search" placeholder="Search deals, products, codes..." autocomplete="off" />
+    </form>
+    <a class="home-link" href="#top">⌂ <span>HOME</span></a>
+  </header>
+
+  <nav class="date-nav" aria-label="Deal date categories">
+    <div class="date-nav__inner" id="dateNav"></div>
+  </nav>
+
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="hero-copy">
+      <p class="eyebrow">Curated finds for soft living</p>
+      <h1 id="heroTitle">Elevate Your<br /><em>Everyday</em> Style</h1>
+      <p class="hero-subtitle">Thoughtful pieces, exceptional deals, and a wardrobe that feels entirely your own.</p>
+      <a class="hero-cta" href="#deals">Explore Collection <span aria-hidden="true">↘</span></a>
+    </div>
+    <div class="hero-art" aria-label="Abstract beige fashion illustration" role="img">
+      <div class="hero-sun"></div><div class="hero-arc hero-arc--one"></div><div class="hero-arc hero-arc--two"></div><div class="hero-arc hero-arc--three"></div>
+      <span class="hero-note hero-note--top">THE DAILY EDIT</span><span class="hero-note hero-note--bottom">THOUGHTFULLY CURATED</span>
+    </div>
+  </section>
+
+  <main id="deals">
+    <section class="collection" aria-labelledby="collectionTitle">
+      <div class="collection-heading">
+        <div><p class="eyebrow">Shop the edit</p><h2 id="collectionTitle">The moodboard<br />is yours to make.</h2></div>
+        <p class="collection-intro">A flexible deal-card template, ready for the finds you want to share.</p>
+      </div>
+      <div class="deal-summary" id="dealSummary" aria-live="polite"></div>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+  </main>
+
+  <footer id="feedback">
+    <div class="footer-brand"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>Planet Muse</a><p>Quiet confidence, curated for every day.</p></div>
+    <div class="footer-meta">
+      <a class="feedback-link" href="mailto:Rebeccaaliash@gmail.com?subject=Planet%20Muse%20deal%20feedback">Email: Rebeccaaliash@gmail.com</a>
+      <p>As an Amazon Associate, I earn from qualifying purchases.</p><p>© <span id="year"></span> Planet Muse</p>
+    </div>
+  </footer>
+
+  <!-- 悬浮按钮区域（包含回到顶部和联系按钮） -->
+  <div class="floating-actions">
+    <button id="backToTopBtn" title="Go to top">↑</button>
+    <button class="floating-contact-btn" id="openContactBtn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      Contact
+    </button>
+  </div>
+
+  <!-- 联系弹窗 -->
+  <div class="modal-overlay" id="contactModal">
+    <div class="chat-modal">
+      <span class="close-modal" id="closeContactBtn">&times;</span>
+      <h3>Hi there 👋</h3>
+      <p>Need help, have a question, or found a broken code? Drop us a message below.</p>
+      
+      <form id="contactForm">
+        <input type="text" id="senderName" placeholder="Your Name" required />
+        <textarea id="senderMsg" placeholder="Your Message..." required></textarea>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+
+      <div class="direct-email-box">
+        Or email us directly at:<br>
+        <a href="mailto:Rebeccaaliash@gmail.com">Rebeccaaliash@gmail.com</a>
+        <button id="copyEmailBtn" style="background:none;border:none;text-decoration:underline;color:var(--muted);font-size:11px;cursor:pointer;margin-left:5px;">(Copy)</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const products = [
+      {
+        id: 1, imageUrl: "https://m.media-amazon.com/images/I/81Vz2Br53JL._AC_SY550_.jpg", title: "Merry Christmas Graphic Shirt For Women Xmas Holiday Short Sleeve Tee", price: "$6.99", oldPrice: "$9.99", discount: "30% off", code: "ERWXAI95", amazonUrl: "https://www.amazon.com/dp/B0HGDHM2FR", time: "10-21 0:00--11-3 23:59", rating: "124", rank: 1
+      },
+      {
+        id: 2, imageUrl: "https://m.media-amazon.com/images/I/71V0y60k-KL._AC_SX569_.jpg", title: "Christmas Tree Shirts for Women Merry Christmas Shirt Holiday Graphic Tee", price: "$6.99-9.03", oldPrice: "$9.99-12.89", discount: "30% off", code: "5M1IAEG9", amazonUrl: "https://www.amazon.com/dp/B0HJ5YQX2F", time: "10-21 0:00--11-4 23:59", rating: "85", rank: 2
+      },
+      {
+        id: 3, imageUrl: "https://m.media-amazon.com/images/I/71DacQVa0ML._AC_SY550_.jpg", title: "Christmas Shirts for Men Christmas Tree Graphic Long Sleeve Holiday Top", price: "$8.99-11.24", oldPrice: "$11.99-14.89", discount: "25% off", code: "WSM2POF6", amazonUrl: "https://www.amazon.com/dp/B0HB3WHJFV", time: "10-21 0:00--10-31 23:59", rating: "92", rank: 3
+      },
+      {
+        id: 4, imageUrl: "https://m.media-amazon.com/images/I/71BWIdvq1kL._AC_SY550_.jpg", title: "Womens Christmas Sweatshirt Xmas Tree Holiday Pullover Tops Blouse", price: "$13.94-18.44", oldPrice: "$18.59-24.59", discount: "25% off", code: "QBSMCN8U", amazonUrl: "https://www.amazon.com/dp/B0FMXVHX9J", time: "10-21 1:00--11-4 23:59", rating: "156", rank: 4
+      },
+      {
+        id: 5, imageUrl: "https://m.media-amazon.com/images/I/61CbsqB82CL._AC_SY550_.jpg", title: "Christmas Shirt for Men Christmas Tree Graphic Tees Merry Christmas Tops", price: "$9.5-11.11", oldPrice: "$11.89-13.89", discount: "20% off", code: "HPB5JDM2", amazonUrl: "https://www.amazon.com/dp/B0FMKDGT2N", time: "10-21 1:00--11-4 23:59", rating: "68", rank: 5
+      }
+    ];
+
+    const dateCategories = ["All deals", "Deals of Oct 20th", "Deals of Oct 19th", "Deals of Oct 18th"];
+    const state = { query: "", date: "All deals" };
+    const grid = document.getElementById("productGrid");
+    const summary = document.getElementById("dealSummary");
+    const dateNav = document.getElementById("dateNav");
+
+    const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[character]));
+
+    function renderDateNav() {
+      dateNav.innerHTML = `<span class="date-nav__label">BROWSE BY DATE</span>${dateCategories.map((category) => `<button class="date-chip ${state.date === category ? "is-active" : ""}" type="button" data-date="${escapeHtml(category)}">${escapeHtml(category)}</button>`).join("")}`;
+    }
+
+    function cardTemplate(product) {
+      return `<article class="product-card">
+        <span class="rank">#${escapeHtml(product.rank)}</span>
+        <div class="image-wrap"><span class="deal-badge">🔥 Deal</span><img src="${product.imageUrl}" alt="${escapeHtml(product.title)}" /></div>
+        <div class="card-body">
+          <p class="rating"><span class="stars" aria-label="5 stars">★★★★★</span> ${escapeHtml(product.rating)} ratings</p>
+          <div class="price-row"><strong class="price">${escapeHtml(product.price)}</strong><s class="regular-price">Reg. ${escapeHtml(product.oldPrice)}</s></div>
+          <h3 class="title">${escapeHtml(product.title)}</h3>
+          <div class="promo-box"><span>Code: ${escapeHtml(product.code)}</span><button class="copy-code" type="button" data-code="${escapeHtml(product.code)}">Copy Code</button></div>
+          <p class="time-stock">Valid: ${escapeHtml(product.time)}</p>
+          <div class="feedback-row"><a class="feedback-link" href="mailto:Rebeccaaliash@gmail.com?subject=Broken%20Link%20Feedback%20for%20${escapeHtml(product.title)}">Report broken link</a></div>
+        </div>
+        <a class="amazon-button" href="${escapeHtml(product.amazonUrl)}" target="_blank" rel="noopener noreferrer">SHOP ON AMAZON <span aria-hidden="true">↗</span></a>
+      </article>`;
+    }
+
+    function filteredProducts() {
+      const query = state.query.trim().toLowerCase();
+      return products.filter((product) => {
+        const searchable = `${product.title} ${product.code}`.toLowerCase();
+        return (!query || searchable.includes(query));
+      });
+    }
+
+    function renderProducts() {
+      const matches = filteredProducts();
+      summary.innerHTML = `<span><strong>${matches.length}</strong> curated deals ready to shop</span>`;
+      grid.innerHTML = matches.length ? matches.map(cardTemplate).join("") : `<div class="empty-state"><p>No deals match that search.</p><button type="button" data-clear>Show all deals</button></div>`;
+    }
+
+    async function copyCode(code, button) {
+      try { await navigator.clipboard.writeText(code); } catch {
+        const helper = document.createElement("textarea"); helper.value = code; helper.style.position = "fixed"; helper.style.opacity = "0"; document.body.appendChild(helper); helper.select(); document.execCommand("copy"); helper.remove();
+      }
+      const originalLabel = button.textContent;
+      button.textContent = "Copied!";
+      window.setTimeout(() => { button.textContent = originalLabel; }, 1400);
+    }
+
+    dateNav.addEventListener("click", (event) => {
+      const chip = event.target.closest("[data-date]");
+      if (!chip) return;
+      state.date = chip.dataset.date;
+      renderDateNav(); renderProducts();
+    });
+
+    grid.addEventListener("click", (event) => {
+      const copyButton = event.target.closest("[data-code]");
+      if (copyButton) copyCode(copyButton.dataset.code, copyButton);
+      if (event.target.closest("[data-clear]")) { state.query = ""; state.date = "All deals"; document.getElementById("searchInput").value = ""; renderDateNav(); renderProducts(); }
+    });
+
+    document.getElementById("searchInput").addEventListener("input", (event) => { state.query = event.target.value; renderProducts(); });
+    document.getElementById("year").textContent = new Date().getFullYear();
+    renderDateNav(); renderProducts();
+
+    // === 极简联系弹窗逻辑 ===
+    const contactModal = document.getElementById('contactModal');
+    const openBtn = document.getElementById('openContactBtn');
+    const closeBtn = document.getElementById('closeContactBtn');
+    const contactForm = document.getElementById('contactForm');
+    const copyEmailBtn = document.getElementById('copyEmailBtn');
+
+    openBtn.addEventListener('click', () => contactModal.classList.add('active'));
+    closeBtn.addEventListener('click', () => contactModal.classList.remove('active'));
+    contactModal.addEventListener('click', (e) => { if (e.target === contactModal) contactModal.classList.remove('active'); });
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('senderName').value;
+      const msg = document.getElementById('senderMsg').value;
+      const mailtoLink = `mailto:Rebeccaaliash@gmail.com?subject=Message%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(msg)}`;
+      window.location.href = mailtoLink;
+      contactModal.classList.remove('active');
+      contactForm.reset();
+    });
+
+    copyEmailBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('Rebeccaaliash@gmail.com');
+        copyEmailBtn.textContent = '(Copied!)';
+        setTimeout(() => { copyEmailBtn.textContent = '(Copy)'; }, 2000);
+      } catch (err) {
+        alert('Failed to copy email');
+      }
+    });
+
+    // === 回到顶部逻辑 ===
+    const backToTopBtn = document.getElementById("backToTopBtn");
+    window.onscroll = function() {
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        backToTopBtn.style.display = "flex";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    };
+    backToTopBtn.onclick = function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  </script>
+</body>
+</html>
