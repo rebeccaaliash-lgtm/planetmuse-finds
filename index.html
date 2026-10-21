@@ -103,69 +103,26 @@
     .footer-meta .feedback-link { display: inline-block; margin-bottom: 5px; color: var(--ink); }
 
     /* 悬浮按钮区 */
-    .floating-actions {
-      position: fixed; bottom: 30px; right: 30px; z-index: 999;
-      display: flex; flex-direction: column; gap: 12px; align-items: center;
-    }
-
-    .floating-contact-btn {
-      background-color: var(--ink); color: white; border: none; padding: 16px 24px;
-      border-radius: 50px; font-weight: 700; font-size: 13px; cursor: pointer;
-      box-shadow: 0 8px 24px rgba(34,32,30,0.2); transition: all 0.3s ease;
-      display: flex; align-items: center; gap: 10px; font-family: Inter, sans-serif;
-    }
+    .floating-actions { position: fixed; bottom: 30px; right: 30px; z-index: 999; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+    .floating-contact-btn { background-color: var(--ink); color: white; border: none; padding: 16px 24px; border-radius: 50px; font-weight: 700; font-size: 13px; cursor: pointer; box-shadow: 0 8px 24px rgba(34,32,30,0.2); transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; font-family: Inter, sans-serif; }
     .floating-contact-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(34,32,30,0.3); background: #000; }
-
-    /* 回到顶部按钮 */
-    #backToTopBtn {
-      display: none; background-color: var(--ink); color: white; border: none;
-      width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
-      box-shadow: 0 8px 24px rgba(34,32,30,0.2); transition: all 0.3s ease;
-      justify-content: center; align-items: center; font-size: 20px;
-    }
+    #backToTopBtn { display: none; background-color: var(--ink); color: white; border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; box-shadow: 0 8px 24px rgba(34,32,30,0.2); transition: all 0.3s ease; justify-content: center; align-items: center; font-size: 20px; }
     #backToTopBtn:hover { transform: translateY(-3px); background: #000; box-shadow: 0 12px 28px rgba(34,32,30,0.3); }
 
     /* 联系弹窗 */
-    .modal-overlay {
-      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.4); z-index: 1000; justify-content: center; align-items: center;
-      backdrop-filter: blur(3px);
-    }
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
     .modal-overlay.active { display: flex; animation: fadeIn 0.2s ease; }
-    
-    .chat-modal {
-      background: var(--paper); padding: 35px; width: min(90%, 420px);
-      border-radius: 12px; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-      animation: slideUp 0.3s ease;
-    }
+    .chat-modal { background: var(--paper); padding: 35px; width: min(90%, 420px); border-radius: 12px; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.15); animation: slideUp 0.3s ease; }
     .chat-modal h3 { margin: 0 0 8px; font-family: "Playfair Display", Georgia, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.02em; }
     .chat-modal p { font-size: 13px; color: var(--muted); margin: 0 0 25px; line-height: 1.6; }
-    
-    .chat-modal input, .chat-modal textarea {
-      width: 100%; padding: 14px; margin-bottom: 16px; border: 1px solid var(--line);
-      font-family: inherit; font-size: 13px; border-radius: 6px; background: #faf9f7;
-      transition: border-color 0.2s ease;
-    }
+    .chat-modal input, .chat-modal textarea { width: 100%; padding: 14px; margin-bottom: 16px; border: 1px solid var(--line); font-family: inherit; font-size: 13px; border-radius: 6px; background: #faf9f7; transition: border-color 0.2s ease; }
     .chat-modal input:focus, .chat-modal textarea:focus { outline: none; border-color: var(--ink); background: white; }
     .chat-modal textarea { height: 100px; resize: none; }
-    
-    .chat-modal .submit-btn {
-      width: 100%; padding: 16px; background: var(--ink); color: white;
-      border: none; border-radius: 6px; font-weight: 700; font-size: 12px;
-      letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s ease;
-    }
+    .chat-modal .submit-btn { width: 100%; padding: 16px; background: var(--ink); color: white; border: none; border-radius: 6px; font-weight: 700; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s ease; }
     .chat-modal .submit-btn:hover { background: #423d39; }
-    
-    .close-modal {
-      position: absolute; top: 20px; right: 20px; font-size: 24px;
-      cursor: pointer; color: var(--muted); line-height: 1; transition: color 0.2s ease;
-    }
+    .close-modal { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; color: var(--muted); line-height: 1; transition: color 0.2s ease; }
     .close-modal:hover { color: var(--ink); }
-    
-    .direct-email-box {
-      margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--line);
-      font-size: 12px; text-align: center; color: var(--muted);
-    }
+    .direct-email-box { margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 12px; text-align: center; color: var(--muted); }
     .direct-email-box a { color: var(--ink); font-weight: 600; cursor: pointer; border-bottom: 1px solid var(--ink); padding-bottom: 2px;}
 
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -248,7 +205,6 @@
     </div>
   </footer>
 
-  <!-- 悬浮按钮区域（包含回到顶部和联系按钮） -->
   <div class="floating-actions">
     <button id="backToTopBtn" title="Go to top">↑</button>
     <button class="floating-contact-btn" id="openContactBtn">
@@ -257,19 +213,16 @@
     </button>
   </div>
 
-  <!-- 联系弹窗 -->
   <div class="modal-overlay" id="contactModal">
     <div class="chat-modal">
       <span class="close-modal" id="closeContactBtn">&times;</span>
       <h3>Hi there 👋</h3>
       <p>Need help, have a question, or found a broken code? Drop us a message below.</p>
-      
       <form id="contactForm">
         <input type="text" id="senderName" placeholder="Your Name" required />
         <textarea id="senderMsg" placeholder="Your Message..." required></textarea>
         <button type="submit" class="submit-btn">Send Message</button>
       </form>
-
       <div class="direct-email-box">
         Or email us directly at:<br>
         <a href="mailto:Rebeccaaliash@gmail.com">Rebeccaaliash@gmail.com</a>
@@ -279,21 +232,22 @@
   </div>
 
   <script>
+    // 新增了 stars 字段，你们可以自己改（比如 5, 4.5, 4, 3.5）
     const products = [
       {
-        id: 1, imageUrl: "https://m.media-amazon.com/images/I/81Vz2Br53JL._AC_SY550_.jpg", title: "Merry Christmas Graphic Shirt For Women Xmas Holiday Short Sleeve Tee", price: "$6.99", oldPrice: "$9.99", discount: "30% off", code: "ERWXAI95", amazonUrl: "https://www.amazon.com/dp/B0HGDHM2FR", time: "10-21 0:00--11-3 23:59", rating: "124", rank: 1
+        id: 1, imageUrl: "https://m.media-amazon.com/images/I/81Vz2Br53JL._AC_SY550_.jpg", title: "Merry Christmas Graphic Shirt For Women Xmas Holiday Short Sleeve Tee", price: "$6.99", oldPrice: "$9.99", discount: "30% off", code: "ERWXAI95", amazonUrl: "https://www.amazon.com/dp/B0HGDHM2FR", time: "10-21 0:00--11-3 23:59", rating: "124", stars: 4.5, rank: 1
       },
       {
-        id: 2, imageUrl: "https://m.media-amazon.com/images/I/71V0y60k-KL._AC_SX569_.jpg", title: "Christmas Tree Shirts for Women Merry Christmas Shirt Holiday Graphic Tee", price: "$6.99-9.03", oldPrice: "$9.99-12.89", discount: "30% off", code: "5M1IAEG9", amazonUrl: "https://www.amazon.com/dp/B0HJ5YQX2F", time: "10-21 0:00--11-4 23:59", rating: "85", rank: 2
+        id: 2, imageUrl: "https://m.media-amazon.com/images/I/71V0y60k-KL._AC_SX569_.jpg", title: "Christmas Tree Shirts for Women Merry Christmas Shirt Holiday Graphic Tee", price: "$6.99-9.03", oldPrice: "$9.99-12.89", discount: "30% off", code: "5M1IAEG9", amazonUrl: "https://www.amazon.com/dp/B0HJ5YQX2F", time: "10-21 0:00--11-4 23:59", rating: "85", stars: 4.8, rank: 2
       },
       {
-        id: 3, imageUrl: "https://m.media-amazon.com/images/I/71DacQVa0ML._AC_SY550_.jpg", title: "Christmas Shirts for Men Christmas Tree Graphic Long Sleeve Holiday Top", price: "$8.99-11.24", oldPrice: "$11.99-14.89", discount: "25% off", code: "WSM2POF6", amazonUrl: "https://www.amazon.com/dp/B0HB3WHJFV", time: "10-21 0:00--10-31 23:59", rating: "92", rank: 3
+        id: 3, imageUrl: "https://m.media-amazon.com/images/I/71DacQVa0ML._AC_SY550_.jpg", title: "Christmas Shirts for Men Christmas Tree Graphic Long Sleeve Holiday Top", price: "$8.99-11.24", oldPrice: "$11.99-14.89", discount: "25% off", code: "WSM2POF6", amazonUrl: "https://www.amazon.com/dp/B0HB3WHJFV", time: "10-21 0:00--10-31 23:59", rating: "92", stars: 4.2, rank: 3
       },
       {
-        id: 4, imageUrl: "https://m.media-amazon.com/images/I/71BWIdvq1kL._AC_SY550_.jpg", title: "Womens Christmas Sweatshirt Xmas Tree Holiday Pullover Tops Blouse", price: "$13.94-18.44", oldPrice: "$18.59-24.59", discount: "25% off", code: "QBSMCN8U", amazonUrl: "https://www.amazon.com/dp/B0FMXVHX9J", time: "10-21 1:00--11-4 23:59", rating: "156", rank: 4
+        id: 4, imageUrl: "https://m.media-amazon.com/images/I/71BWIdvq1kL._AC_SY550_.jpg", title: "Womens Christmas Sweatshirt Xmas Tree Holiday Pullover Tops Blouse", price: "$13.94-18.44", oldPrice: "$18.59-24.59", discount: "25% off", code: "QBSMCN8U", amazonUrl: "https://www.amazon.com/dp/B0FMXVHX9J", time: "10-21 1:00--11-4 23:59", rating: "156", stars: 4.9, rank: 4
       },
       {
-        id: 5, imageUrl: "https://m.media-amazon.com/images/I/61CbsqB82CL._AC_SY550_.jpg", title: "Christmas Shirt for Men Christmas Tree Graphic Tees Merry Christmas Tops", price: "$9.5-11.11", oldPrice: "$11.89-13.89", discount: "20% off", code: "HPB5JDM2", amazonUrl: "https://www.amazon.com/dp/B0FMKDGT2N", time: "10-21 1:00--11-4 23:59", rating: "68", rank: 5
+        id: 5, imageUrl: "https://m.media-amazon.com/images/I/61CbsqB82CL._AC_SY550_.jpg", title: "Christmas Shirt for Men Christmas Tree Graphic Tees Merry Christmas Tops", price: "$9.5-11.11", oldPrice: "$11.89-13.89", discount: "20% off", code: "HPB5JDM2", amazonUrl: "https://www.amazon.com/dp/B0FMKDGT2N", time: "10-21 1:00--11-4 23:59", rating: "38", stars: 4.5, rank: 5
       }
     ];
 
@@ -305,6 +259,14 @@
 
     const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[character]));
 
+    // 自动生成星星的代码，不用管它
+    function getStarString(rating) {
+      const fullStars = Math.floor(rating);
+      const hasHalfStar = rating % 1 >= 0.5;
+      const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+      return "★".repeat(fullStars) + (hasHalfStar ? "⯪" : "") + "☆".repeat(emptyStars);
+    }
+
     function renderDateNav() {
       dateNav.innerHTML = `<span class="date-nav__label">BROWSE BY DATE</span>${dateCategories.map((category) => `<button class="date-chip ${state.date === category ? "is-active" : ""}" type="button" data-date="${escapeHtml(category)}">${escapeHtml(category)}</button>`).join("")}`;
     }
@@ -314,7 +276,7 @@
         <span class="rank">#${escapeHtml(product.rank)}</span>
         <div class="image-wrap"><span class="deal-badge">🔥 Deal</span><img src="${product.imageUrl}" alt="${escapeHtml(product.title)}" /></div>
         <div class="card-body">
-          <p class="rating"><span class="stars" aria-label="5 stars">★★★★★</span> ${escapeHtml(product.rating)} ratings</p>
+          <p class="rating"><span class="stars" aria-label="${product.stars} stars">${getStarString(product.stars)}</span> ${escapeHtml(product.rating)} ratings</p>
           <div class="price-row"><strong class="price">${escapeHtml(product.price)}</strong><s class="regular-price">Reg. ${escapeHtml(product.oldPrice)}</s></div>
           <h3 class="title">${escapeHtml(product.title)}</h3>
           <div class="promo-box"><span>Code: ${escapeHtml(product.code)}</span><button class="copy-code" type="button" data-code="${escapeHtml(product.code)}">Copy Code</button></div>
